@@ -23,10 +23,7 @@ Simplifications (this is a school project, not an engineering tool):
   * Material weight = density * volume.
   * Material cost   = weight * cost per pound.
 
-Advanced technique used (not covered in class), documented here and in the code:
-  * Sorting with a ``key=`` function: ``list.sort(key=function)`` sorts a list
-    by whatever value the key function returns for each item. See
-    ``search_materials``.
+The site uses no advanced coding techniques beyond what was covered in class.
 """
 
 from dataclasses import dataclass
@@ -265,16 +262,39 @@ def find_failed_constraints(material: Material, state: State) -> list[str]:
     return failed_constraints
 
 
+def sort_materials_by_cost(materials: list[Material],
+                           volume: float) -> list[Material]:
+    """Put materials in order from cheapest to most expensive.
+
+    Works by repeating one simple step: find the cheapest material that is
+    still left in the list, move it to the end of the sorted list, and repeat
+    until no materials are left.
+
+    Args:
+        materials: The materials to sort. This list is emptied by the function.
+        volume: Volume of material in cubic feet, used to calculate each cost.
+
+    Returns:
+        A new list with the same materials, cheapest first.
+    """
+    sorted_materials = []
+    while len(materials) > 0:
+        cheapest_material = materials[0]
+        for material in materials:
+            if (calculate_cost(material, volume)
+                    < calculate_cost(cheapest_material, volume)):
+                cheapest_material = material
+        sorted_materials.append(cheapest_material)
+        materials.remove(cheapest_material)
+    return sorted_materials
+
+
 def search_materials(state: State) -> None:
     """Find every material that satisfies the constraints and store the results.
 
     Loops over the catalog in ``state.materials``, keeps the materials that fail
     no constraint, sorts them from cheapest to most expensive, and saves them in
     ``state.matches``. A SearchRecord is also added to ``state.history``.
-
-    Advanced technique: ``sort(key=...)`` calls the key function on every item
-    and sorts the items by the value it returns. Here the key is each material's
-    total cost, so the cheapest material ends up first.
 
     Args:
         state: The current State. Its ``matches`` and ``history`` are modified.
@@ -284,11 +304,7 @@ def search_materials(state: State) -> None:
         if len(find_failed_constraints(material, state)) == 0:
             found_materials.append(material)
 
-    def total_cost_of(material: Material) -> float:
-        """Sorting key: the total cost of the material for this project."""
-        return calculate_cost(material, state.volume)
-
-    found_materials.sort(key=total_cost_of)
+    found_materials = sort_materials_by_cost(found_materials, state.volume)
     state.matches = found_materials
 
     if len(found_materials) == 0:
@@ -761,4 +777,3 @@ start_server(State(
     matches=[],
     history=[],
 ))
-
