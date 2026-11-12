@@ -1,13 +1,3 @@
-set_website_title("Material Finder")
-set_site_information(
-    author="Maxwell Hankey",
-    description="Find's a material based on constraints you give.",
-    sources="None",
-    planning=["https://github.com/Mhankey-cyber/Material-Finder/blob/main/Final%20CISC106%20Brainstorming%20Sheets.pdf"],
-    links=["https://github.com/Mhankey-cyber/Material-Finder"]
-)
-hide_debug_information()
-set_website_framed(False)
 """
 Material Finder
 ===============
@@ -38,6 +28,17 @@ The site uses no advanced coding techniques beyond what was covered in class.
 
 from dataclasses import dataclass
 from drafter import *
+
+set_website_title("Material Finder")
+set_site_information(
+    author="Maxwell Hankey",
+    description="Find's a material based on constraints you give.",
+    sources="None",
+    planning=["https://github.com/Mhankey-cyber/Material-Finder/blob/main/Final%20CISC106%20Brainstorming%20Sheets.pdf"],
+    links=["https://github.com/Mhankey-cyber/Material-Finder"]
+)
+hide_debug_information()
+set_website_framed(False)
 
 # ---------------------------------------------------------------------------
 # Constants (global constants are allowed; they are never changed)
