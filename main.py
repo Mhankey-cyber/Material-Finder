@@ -1,9 +1,10 @@
 set_website_title("Material Finder")
 set_site_information(
     author="Maxwell Hankey",
-    description="Find's a material based on constraints you give",
+    description="Find's a material based on constraints you give.",
     sources="None",
-    planning=["Final CISC106 Brainstorming Sheets.pdf", "Material_Finder_LLM_Conversation (1).pdf"],
+    planning=["https://github.com/Mhankey-cyber/Material-Finder/blob/main/Final%20CISC106%20Brainstorming%20Sheets.pdf", 
+              "https://github.com/Mhankey-cyber/Material-Finder/blob/main/Material_Finder_LLM_Conversation%20(1).pdf"],
     links=["https://github.com/Mhankey-cyber/Material-Finder"]
 )
 hide_debug_information()
