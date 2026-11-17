@@ -29,6 +29,8 @@ The site uses no advanced coding techniques beyond what was covered in class.
 from dataclasses import dataclass
 from drafter import *
 
+set_website_style("daub")
+
 set_website_title("Material Finder")
 set_site_information(
     author="Maxwell Hankey",
